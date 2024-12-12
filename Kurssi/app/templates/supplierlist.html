@@ -10,7 +10,7 @@
 
 <button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Add new supplier</button>
 
-
+<!-- # Form lähettää search suppliers urliin pyynnön (formin sisältö mukaan "name=search" sisältö) -->
         <form method="post" action="/search-suppliers/">
 
             {%csrf_token %}

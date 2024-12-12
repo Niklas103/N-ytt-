@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+admin.site.site_header = 'Suppliers app adminpage'
+admin.site.site_title = 'Suppliers'
+admin.site.index_title = 'Adminpage'
+
 urlpatterns = [
     path('admin/', admin.site.urls), # Päätasolta jos kirjoitetaan admin niin ohjaa adminiin
     path ('', include('app.urls')) # Path: '' <-- tarkoittaa että jos mennään sovelluksen juureen, niin etsitäänkin 'app' kansion urleista lisää tiedosto polkuja (Eli kun kirjoitetaan vaan sovelluksen osoite tämä etsii urlit tässä mitkä on esitelty "app.urls")
