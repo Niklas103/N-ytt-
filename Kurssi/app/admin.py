@@ -3,12 +3,12 @@
 
 from django.contrib import admin
 
-from app.models import Supplier, Product
+from app.models import Toimittaja, Tuote
 
-@admin.register(Product)
+@admin.register(Tuote)
 class ProductAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Supplier)
+@admin.register(Toimittaja)
 class SupplierAdmin(admin.ModelAdmin):
     pass

@@ -1,7 +1,7 @@
 # Render = Renderöidään tietty html templates kansiosta
 # Redirect = Ohjataan ohjelman suoritus johonkin toiseen view functioon
 from django.shortcuts import render, redirect
-from .models import Supplier, Product
+from .models import Toimittaja, Tuote
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
@@ -23,7 +23,7 @@ def login_action(request):
         # Tervehdystä varten context
         context = {'name': user.first_name}
         # Kutsutaan suoraan landingview.html
-        return render(request,'landingpage.html',context)
+        return render(request,'paasivu.html',context)
     # Jos ei kyseistä käyttäjää löydy
     else:
         return render(request, 'loginerror.html')
@@ -38,15 +38,15 @@ def logout_action(request):
 # def landingview(request):
 #     return render(request, 'landingpage.html')
 
-# Product views
-def productlistview(request):
+# Tuote views
+def tuotelistaview(request):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
     else:
-        productlist = Product.objects.all()
-        supplierlist = Supplier.objects.all()
-        context = {'products': productlist, 'suppliers': supplierlist}
-        return render (request,"productlist.html",context)
+        tuotelista = Tuote.objects.all()
+        toimittajalista = Toimittaja.objects.all()
+        context = {'products': tuotelista, 'suppliers': toimittajalista}
+        return render (request,"tuotelista.html",context)
 
 
 def addproduct(request):
@@ -56,50 +56,50 @@ def addproduct(request):
     d = request.POST['unitsinstock']
     e = request.POST['supplier']
     
-    Product(productname = a, packagesize = b, unitprice = c, unitsinstock = d, supplier = Supplier.objects.get(id = e)).save()
+    Tuote(productname = a, packagesize = b, unitprice = c, unitsinstock = d, supplier = Toimittaja.objects.get(id = e)).save()
     return redirect(request.META['HTTP_REFERER'])
 
 def confirmdeleteproduct(request, id):
-    product = Product.objects.get(id = id)
+    product = Tuote.objects.get(id = id)
     context = {'product': product}
     return render (request,"confirmdelprod.html",context)
 
 
 def deleteproduct(request, id):
-    Product.objects.get(id = id).delete()
-    return redirect(productlistview)
+    Tuote.objects.get(id = id).delete()
+    return redirect(tuotelistaview)
 
 
 def edit_product_get(request, id):
-        product = Product.objects.get(id = id)
+        product = Tuote.objects.get(id = id)
         context = {'product': product}
         return render (request,"edit_product.html",context)
 
 
 def edit_product_post(request, id):
-        item = Product.objects.get(id = id)
-        item.unitprice = request.POST['unitprice']
-        item.unitsinstock = request.POST['unitsinstock']
+        item = Tuote.objects.get(id = id)
+        item.kappalehinta = request.POST['unitprice']
+        item.tuotteitavarastossa = request.POST['unitsinstock']
         item.save()
-        return redirect(productlistview)
+        return redirect(tuotelistaview)
 
 
 def products_filtered(request, id):
-    productlist = Product.objects.all()
-    filteredproducts = productlist.filter(supplier = id)
+    tuotelista = Tuote.objects.all()
+    filteredproducts = tuotelista.filter(supplier = id)
     context = {'products': filteredproducts}
-    return render (request,"productlist.html",context)
+    return render (request,"tuotelista.html",context)
 
 
 
 # Supplier views
-def supplierlistview(request):
+def toimittajalistaview(request):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
     else:
-        supplierlist = Supplier.objects.all()
-        context = {'suppliers': supplierlist}
-        return render (request,"supplierlist.html",context)
+        toimittajalista = Toimittaja.objects.all()
+        context = {'suppliers': toimittajalista}
+        return render (request,"toimittajalista.html",context)
 
 
 def addsupplier(request):
@@ -109,12 +109,12 @@ def addsupplier(request):
     d = request.POST['phone']
     e = request.POST['email']
     f = request.POST['country']
-    Supplier(companyname = a, contactname = b, address = c, phone = d, email = e, country = f).save()
+    Toimittaja(companyname = a, contactname = b, address = c, phone = d, email = e, country = f).save()
     return redirect(request.META['HTTP_REFERER'])
 
 
 def searchsuppliers(request):
     search = request.POST['search']
-    filtered = Supplier.objects.filter(companyname__icontains=search)
+    filtered = Toimittaja.objects.filter(companyname__icontains=search)
     context = {'suppliers': filtered}
-    return render (request,"supplierlist.html",context)
+    return render (request,"toimittajalista.html",context)
