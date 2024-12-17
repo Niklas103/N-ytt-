@@ -45,7 +45,7 @@ def tuotelistaview(request):
     else:
         tuotelista = Tuote.objects.all()
         toimittajalista = Toimittaja.objects.all()
-        context = {'products': tuotelista, 'suppliers': toimittajalista}
+        context = {'tuotteet': tuotelista, 'toimittajat': toimittajalista}
         return render (request,"tuotelista.html",context)
 
 
@@ -87,7 +87,7 @@ def edit_product_post(request, id):
 def products_filtered(request, id):
     tuotelista = Tuote.objects.all()
     filteredproducts = tuotelista.filter(supplier = id)
-    context = {'products': filteredproducts}
+    context = {'tuotteet': filteredproducts}
     return render (request,"tuotelista.html",context)
 
 
@@ -98,7 +98,7 @@ def toimittajalistaview(request):
         return render(request, 'loginpage.html')
     else:
         toimittajalista = Toimittaja.objects.all()
-        context = {'suppliers': toimittajalista}
+        context = {'toimittajat': toimittajalista}
         return render (request,"toimittajalista.html",context)
 
 
@@ -116,5 +116,5 @@ def addsupplier(request):
 def searchsuppliers(request):
     search = request.POST['search']
     filtered = Toimittaja.objects.filter(companyname__icontains=search)
-    context = {'suppliers': filtered}
+    context = {'toimittajat': filtered}
     return render (request,"toimittajalista.html",context)

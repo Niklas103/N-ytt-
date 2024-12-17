@@ -6,9 +6,9 @@ from django.contrib import admin
 from app.models import Toimittaja, Tuote
 
 @admin.register(Tuote)
-class ProductAdmin(admin.ModelAdmin):
+class TuoteAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Toimittaja)
-class SupplierAdmin(admin.ModelAdmin):
+class ToimittajaAdmin(admin.ModelAdmin):
     pass

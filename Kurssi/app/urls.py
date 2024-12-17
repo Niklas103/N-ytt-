@@ -33,7 +33,7 @@ urlpatterns = [
     path('logout/', logout_action),
 
      # Products url´s
-    path('products/', tuotelistaview),
+    path('tuotteet/', tuotelistaview),
     path('add-product/', addproduct),
     path('delete-product/<int:id>/', deleteproduct),
     path('confirm-delete-product/<int:id>/', confirmdeleteproduct),
@@ -42,7 +42,7 @@ urlpatterns = [
     path('products-by-supplier/<int:id>/', products_filtered),
 
     # Supplier url´s
-    path('suppliers/', toimittajalistaview),
+    path('toimittajat/', toimittajalistaview),
     path('add-supplier/', addsupplier),
     path('search-suppliers/', searchsuppliers),
 
