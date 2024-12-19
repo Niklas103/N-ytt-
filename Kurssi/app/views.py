@@ -70,16 +70,16 @@ def tuotepoisto(request, id):
     return redirect(tuotelistaview)
 
 
-def edit_product_get(request, id):
-        product = Tuote.objects.get(id = id)
-        context = {'product': product}
-        return render (request,"edit_product.html",context)
+def edit_tuote_get(request, id):
+        tuote = Tuote.objects.get(id = id)
+        context = {'tuote': tuote}
+        return render (request,"edit_tuote.html",context)
 
 
-def edit_product_post(request, id):
+def edit_tuote_post(request, id):
         item = Tuote.objects.get(id = id)
-        item.kappalehinta = request.POST['unitprice']
-        item.tuotteitavarastossa = request.POST['unitsinstock']
+        item.kappalehinta = request.POST['kappalehinta']
+        item.tuotteitavarastossa = request.POST['tuotteitavarastossa']
         item.save()
         return redirect(tuotelistaview)
 
@@ -92,7 +92,7 @@ def products_filtered(request, id):
 
 
 
-# Supplier views
+# Toimittaja views
 def toimittajalistaview(request):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
@@ -113,8 +113,8 @@ def lisäätoimittaja(request):
     return redirect(request.META['HTTP_REFERER'])
 
 
-def searchsuppliers(request):
+def etsitoimittaja(request):
     search = request.POST['search']
-    filtered = Toimittaja.objects.filter(companyname__icontains=search)
+    filtered = Toimittaja.objects.filter(yritysnimi__icontains=search)
     context = {'toimittajat': filtered}
     return render (request,"toimittajalista.html",context)

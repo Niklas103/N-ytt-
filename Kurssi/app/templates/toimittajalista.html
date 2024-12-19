@@ -11,7 +11,7 @@
 <button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Lisää uusi toimittaja</button>
 
 <!-- # Form lähettää search suppliers urliin pyynnön (formin sisältö mukaan "name=search" sisältö) -->
-        <form method="post" action="/search-suppliers/">
+        <form method="post" action="/etsi-toimittaja/">
 
             {%csrf_token %}
             <input class="card-text" class="card-text" type="text" placeholder="search" name="search">

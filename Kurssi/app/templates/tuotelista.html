@@ -19,9 +19,9 @@
         <h5 class="card-text">Toimittaja: {{p.toimittaja.yritysnimi}}</h5>
         <p class="card-text">Tuote paino: {{p.k}} | painoperkappale: {{p.painoperkappale}}</p>
         <p class="card-text" style="color: green;">Määrä varastossa: {{p.tuotteitavarastossa}}</p>
-        <a href="/edit-product-get/{{p.id}}/" class="btn btn-primary">Muokkaa</a>
+        <a href="/edit-tuote-get/{{p.id}}/" class="btn btn-primary">Muokkaa</a>
 
-        <a href="/confirm-delete-product/{{p.id}}/" class="btn btn-danger">Poista</a>
+        <a href="/vahvista-tuote-poisto/{{p.id}}/" class="btn btn-danger">Poista</a>
 
         <a href="/products-by-supplier/{{p.toimittaja.id}}/" class="btn btn-secondary">{{p.toimittaja.yritysnimi}} kaikki
             tuotteet</a>

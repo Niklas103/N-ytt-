@@ -18,7 +18,7 @@ from django.urls import path
 
 from .views import tuotelistaview, toimittajalistaview, products_filtered
 from .views import lisäätoimittaja, lisäätuote, tuotepoisto, vahvistatuotepoisto
-from .views import edit_product_post, edit_product_get, searchsuppliers
+from .views import edit_tuote_get, edit_tuote_post, etsitoimittaja
 from .views import loginview, login_action, logout_action
 
 # syntaksi: Mikä osoite polku: '' sovelluksen juuri: landingview (renderöidään landingview). App kansion sisältä, view tiedostosta importataan landingview
@@ -37,13 +37,13 @@ urlpatterns = [
     path('lisää-tuote/', lisäätuote),
     path('poista-tuote/<int:id>/', tuotepoisto),
     path('vahvista-tuote-poisto/<int:id>/', vahvistatuotepoisto),
-    path('edit-product-get/<int:id>/', edit_product_get),
-    path('edit-product-post/<int:id>/', edit_product_post),
+    path('edit-tuote-get/<int:id>/', edit_tuote_get),
+    path('edit-tuote-post/<int:id>/', edit_tuote_post),
     path('products-by-supplier/<int:id>/', products_filtered),
 
     # Toimittaja url´s
     path('toimittajat/', toimittajalistaview),
     path('lisää-toimittaja/', lisäätoimittaja),
-    path('search-suppliers/', searchsuppliers),
+    path('etsi-toimittaja/', etsitoimittaja),
 
 ]
