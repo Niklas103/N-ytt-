@@ -49,23 +49,23 @@ def tuotelistaview(request):
         return render (request,"tuotelista.html",context)
 
 
-def addproduct(request):
-    a = request.POST['productname']
-    b = request.POST['packagesize']
-    c = request.POST['unitprice']
-    d = request.POST['unitsinstock']
-    e = request.POST['supplier']
+def lisäätuote(request):
+    a = request.POST['tuotenimi']
+    b = request.POST['painoperkappale']
+    c = request.POST['kappalehinta']
+    d = request.POST['tuotteitavarastossa']
+    e = request.POST['toimittaja']
     
-    Tuote(productname = a, packagesize = b, unitprice = c, unitsinstock = d, supplier = Toimittaja.objects.get(id = e)).save()
+    Tuote(tuotenimi = a, painoperkappale = b, kappalehinta = c, tuotteitavarastossa = d, toimittaja = Toimittaja.objects.get(id = e)).save()
     return redirect(request.META['HTTP_REFERER'])
 
-def confirmdeleteproduct(request, id):
-    product = Tuote.objects.get(id = id)
-    context = {'product': product}
-    return render (request,"confirmdelprod.html",context)
+def vahvistatuotepoisto(request, id):
+    tuote = Tuote.objects.get(id = id)
+    context = {'tuote': tuote}
+    return render (request,"tuotepoisto.html",context)
 
 
-def deleteproduct(request, id):
+def tuotepoisto(request, id):
     Tuote.objects.get(id = id).delete()
     return redirect(tuotelistaview)
 
@@ -102,14 +102,14 @@ def toimittajalistaview(request):
         return render (request,"toimittajalista.html",context)
 
 
-def addsupplier(request):
-    a = request.POST['companyname']
-    b = request.POST['contactname']
-    c = request.POST['address']
-    d = request.POST['phone']
-    e = request.POST['email']
-    f = request.POST['country']
-    Toimittaja(companyname = a, contactname = b, address = c, phone = d, email = e, country = f).save()
+def lisäätoimittaja(request):
+    a = request.POST['yritysnimi']
+    b = request.POST['yhteyshenkiö']
+    c = request.POST['osoite']
+    d = request.POST['puhelin']
+    e = request.POST['sähköposti']
+    f = request.POST['maa']
+    Toimittaja(yritysnimi = a, yhteyshenkiö = b, osoite = c, puhelin = d, sähköposti = e, maa = f).save()
     return redirect(request.META['HTTP_REFERER'])
 
 

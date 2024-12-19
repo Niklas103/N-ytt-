@@ -8,7 +8,7 @@
 
 <h1 style="color: darkviolet">Suppliers</h1>
 
-<button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Add new supplier</button>
+<button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Lisää uusi toimittaja</button>
 
 <!-- # Form lähettää search suppliers urliin pyynnön (formin sisältö mukaan "name=search" sisältö) -->
         <form method="post" action="/search-suppliers/">
@@ -20,16 +20,16 @@
         </form>
   
 
-{% for s in suppliers %}
+{% for s in toimittaja %}
 <div class="card" style="width: 50rem;">
     <div class="card-body">
-        <h4 class="card-title">{{s.companyname}}</h4>
-        <p class="card-text">{{s.contactname}} | phone: {{s.phone}} | email: {{s.email}} </p>
-        <p class="card-text">Address: {{s.address}} | Country: {{s.country}}</p>
+        <h4 class="card-title">{{s.yritysnimi}}</h4>
+        <p class="card-text">{{s.yhteyshenkiö}} | phone: {{s.puhelin}} | email: {{s.sähköposti}} </p>
+        <p class="card-text">Address: {{s.osoite}} | Country: {{s.maa}}</p>
 
         <a href="/edit-supplier-get/{{s.id}}/" class="btn btn-primary">Edit</a>
         <a href="/confirm-delete-supplier/{{s.id}}/" class="btn btn-danger">Delete</a>
-        <a href="/products-by-supplier/{{s.id}}/" class="btn btn-secondary">{{s.companyname}} Products</a>
+        <a href="/products-by-supplier/{{s.id}}/" class="btn btn-secondary">{{s.yritysnimi}} Products</a>
     </div>
 </div>
 
@@ -40,19 +40,19 @@
 <script>
 
     let x = `
-    <h2 style="color: lightblue">Please fill in form</h2>
+    <h2 style="color: lightblue">Täytä tiedot</h2>
     
     <div class="card" style="width: 20rem;">
         <div class="card-body">
-            <form method="post" action="/add-supplier/">
+            <form method="post" action="/lisää-toimittaja/">
     
                 {% csrf_token %}
-                <input class="card-text" class="card-text" type="text" placeholder="company´s name" name="companyname">
-                <input class="card-text" type="text" placeholder="contact person" name="contactname">
-                <input class="card-text" type="text" placeholder="address" name="address">
-                <input class="card-text" type="text" placeholder="phone" name="phone">
-                <input class="card-text" type="text" placeholder="email" name="email">
-                <input class="card-text" type="text" placeholder="country" name="country">
+                <input class="card-text" class="card-text" type="text" placeholder="yrityksen nimi" name="yritysnimi">
+                <input class="card-text" type="text" placeholder="contact person" name="yhteyshenkilö">
+                <input class="card-text" type="text" placeholder="osoite" name="osoite">
+                <input class="card-text" type="text" placeholder="puhelin" name="puhelin">
+                <input class="card-text" type="text" placeholder="sähköposti" name="sähköposti">
+                <input class="card-text" type="text" placeholder="maa" name="maa">
                 <br/>
                 <input type="submit" value="Confirm" class="btn btn-success btn-sm" name="">
                 <input type="submit" id="hide-btn" class="btn btn-secondary btn-sm" onclick="hideaddform()" value="Cancel" name="">

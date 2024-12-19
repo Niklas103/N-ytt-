@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path
 
 from .views import tuotelistaview, toimittajalistaview, products_filtered
-from .views import addsupplier, addproduct, deleteproduct, confirmdeleteproduct
+from .views import lisäätoimittaja, lisäätuote, tuotepoisto, vahvistatuotepoisto
 from .views import edit_product_post, edit_product_get, searchsuppliers
 from .views import loginview, login_action, logout_action
 
@@ -32,18 +32,18 @@ urlpatterns = [
     path('login/', login_action),
     path('logout/', logout_action),
 
-     # Products url´s
+     # Tuote url´s
     path('tuotteet/', tuotelistaview),
-    path('add-product/', addproduct),
-    path('delete-product/<int:id>/', deleteproduct),
-    path('confirm-delete-product/<int:id>/', confirmdeleteproduct),
+    path('lisää-tuote/', lisäätuote),
+    path('poista-tuote/<int:id>/', tuotepoisto),
+    path('vahvista-tuote-poisto/<int:id>/', vahvistatuotepoisto),
     path('edit-product-get/<int:id>/', edit_product_get),
     path('edit-product-post/<int:id>/', edit_product_post),
     path('products-by-supplier/<int:id>/', products_filtered),
 
-    # Supplier url´s
+    # Toimittaja url´s
     path('toimittajat/', toimittajalistaview),
-    path('add-supplier/', addsupplier),
+    path('lisää-toimittaja/', lisäätoimittaja),
     path('search-suppliers/', searchsuppliers),
 
 ]
