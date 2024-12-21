@@ -16,16 +16,13 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import tuotelistaview, toimittajalistaview, products_filtered
+from .views import tuotelistaview, toimittajalistaview, tuotteet_filtered
 from .views import lisäätoimittaja, lisäätuote, tuotepoisto, vahvistatuotepoisto
 from .views import edit_tuote_get, edit_tuote_post, etsitoimittaja
 from .views import loginview, login_action, logout_action
 
 # syntaksi: Mikä osoite polku: '' sovelluksen juuri: landingview (renderöidään landingview). App kansion sisältä, view tiedostosta importataan landingview
 urlpatterns = [
-    # path('', landingview),
-
-
   
     # Login & logout
     path('', loginview),
@@ -39,7 +36,7 @@ urlpatterns = [
     path('vahvista-tuote-poisto/<int:id>/', vahvistatuotepoisto),
     path('edit-tuote-get/<int:id>/', edit_tuote_get),
     path('edit-tuote-post/<int:id>/', edit_tuote_post),
-    path('products-by-supplier/<int:id>/', products_filtered),
+    path('tuote-toimittajan-mukaan/<int:id>/', tuotteet_filtered),
 
     # Toimittaja url´s
     path('toimittajat/', toimittajalistaview),

@@ -35,8 +35,6 @@ def logout_action(request):
     return render(request, 'loginpage.html')
 
 # 'Request' on views näkymä funktioiden ensimmäinen parametri minkä ottavat vastaan
-# def landingview(request):
-#     return render(request, 'landingpage.html')
 
 # Tuote views
 def tuotelistaview(request):
@@ -84,10 +82,10 @@ def edit_tuote_post(request, id):
         return redirect(tuotelistaview)
 
 
-def products_filtered(request, id):
+def tuotteet_filtered(request, id):
     tuotelista = Tuote.objects.all()
-    filteredproducts = tuotelista.filter(supplier = id)
-    context = {'tuotteet': filteredproducts}
+    filteredtuotteet = tuotelista.filter(toimittaja = id)
+    context = {'tuotteet': tuotteet_filtered}
     return render (request,"tuotelista.html",context)
 
 
