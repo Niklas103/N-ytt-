@@ -6,7 +6,7 @@
 <div id="add-div"></div>
 <br />
 
-<h1 style="color: darkviolet">Suppliers</h1>
+<h1 style="color: darkviolet">Toimittajat</h1>
 
 <button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Lisää uusi toimittaja</button>
 
@@ -20,16 +20,16 @@
         </form>
   
 
-{% for s in toimittaja %}
+{% for s in toimittajat %}
 <div class="card" style="width: 50rem;">
     <div class="card-body">
         <h4 class="card-title">{{s.yritysnimi}}</h4>
-        <p class="card-text">{{s.yhteyshenkiö}} | phone: {{s.puhelin}} | email: {{s.sähköposti}} </p>
-        <p class="card-text">Address: {{s.osoite}} | Country: {{s.maa}}</p>
+        <p class="card-text">{{s.yhteyshenkiö}} | puhelin: {{s.puhelin}} | email: {{s.sähköposti}} </p>
+        <p class="card-text">Osoite: {{s.osoite}} | Country: {{s.maa}}</p>
 
-        <a href="/edit-toimittaja-get/{{s.id}}/" class="btn btn-primary">Edit</a>
-        <a href="/confirm-delete-supplier/{{s.id}}/" class="btn btn-danger">Delete</a>
-        <a href="/tuote-toimittajan-mukaan/{{s.id}}/" class="btn btn-secondary">{{s.yritysnimi}} Products</a>
+        <a href="/edit-toimittaja-get/{{s.id}}/" class="btn btn-primary">Muokkaa</a>
+        <a href="/vahvista-toimittaja-poisto/{{s.id}}/" class="btn btn-danger">Poista</a>
+        <a href="/tuote-toimittajan-mukaan/{{s.id}}/" class="btn btn-secondary">{{s.yritysnimi}} Tuotteet</a>
     </div>
 </div>
 
@@ -48,7 +48,7 @@
     
                 {% csrf_token %}
                 <input class="card-text" class="card-text" type="text" placeholder="yrityksen nimi" name="yritysnimi">
-                <input class="card-text" type="text" placeholder="contact person" name="yhteyshenkilö">
+                <input class="card-text" type="text" placeholder="yhteyshenkilö" name="yhteyshenkilö">
                 <input class="card-text" type="text" placeholder="osoite" name="osoite">
                 <input class="card-text" type="text" placeholder="puhelin" name="puhelin">
                 <input class="card-text" type="text" placeholder="sähköposti" name="sähköposti">

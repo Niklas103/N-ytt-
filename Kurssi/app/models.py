@@ -6,7 +6,7 @@ from django.db import models
 # Model on djangon database tyyppinen model luokka
 class Toimittaja(models.Model):
     yritysnimi = models.CharField(max_length = 50, default="yritysnimi")
-    yhteyshenkilö = models.CharField(max_length = 50, default="yhteyshenkiö")
+    yhteyshenkilö = models.CharField(max_length = 50, default="yhteyshenkilö")
     osoite = models.CharField(max_length = 100, default="osoite")
     puhelin = models.CharField(max_length = 20, default="puhelin")
     sähköposti = models.CharField(max_length = 50, default="sähköposti")
