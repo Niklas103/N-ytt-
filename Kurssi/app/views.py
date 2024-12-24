@@ -53,7 +53,7 @@ def lisäätuote(request):
     else:
         a = request.POST['tuotenimi']
         b = request.POST['painoperkappale']
-        c = request.POST['kappalehinta']
+        c = request.POST['kappalehinta'].replace(',', '.')  # Muunna pilkku pisteeksi
         d = request.POST['tuotteitavarastossa']
         e = request.POST['toimittaja']
     
@@ -161,3 +161,26 @@ def toimittajapoisto(request, id):
         except Toimittaja.DoesNotExist:
             # Jos toimittajaa ei löydy, ohjataan virhesivulle tai näyttää viestin
             return render(request, 'error.html', {'message': 'Toimittajaa ei löytynyt!'})
+
+def edit_toimittaja_post(request, id):
+    if not request.user.is_authenticated:
+        return render(request, 'loginpage.html')
+    else:
+        item = Toimittaja.objects.get(id=id)
+        item.yritysnimi = request.POST['yritysnimi']
+        item.yhteyshenkilö = request.POST['yhteyshenkilö']
+        item.osoite = request.POST['osoite']
+        item.puhelin = request.POST['puhelin']
+        item.sähköposti = request.POST['sähköposti']
+        item.maa = request.POST['maa']
+        item.save()
+        return redirect(toimittajalistaview)  # Suora funktioviittaus
+    
+def edit_toimittaja_get(request, id):
+        if not request.user.is_authenticated:
+            return render(request, 'loginpage.html')
+        try:
+            toimittaja = Toimittaja.objects.get(id=id)  # Haetaan toimittajan tiedot ID:n perusteella
+            return render(request, 'edit_toimittaja.html', {'toimittaja': toimittaja})  # Lähetetään tiedot lomakkeelle
+        except Toimittaja.DoesNotExist:
+            return render(request, 'error.html', {'message': 'Toimittajaa ei löytynyt!'})  # Jos toimittajaa ei löydy

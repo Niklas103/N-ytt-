@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="card" style="width: 25rem; margin: auto; margin-top: 20px;">
+    <div class="card-header text-center">
+
+        <h5>Muokkaa toimittajaa: {{ toimittaja.yritysnimi }}</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/edit-toimittaja-post/{{ toimittaja.id }}/">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="yritysnimi">Yritysnimi</label>
+                <input type="text" class="form-control" id="yritysnimi" name="yritysnimi" value="{{ toimittaja.yritysnimi }}" required>
+            </div>
+            <div class="form-group">
+                <label for="yhteyshenkilö">Yhteyshenkilö</label>
+                <input type="text" class="form-control" id="yhteyshenkilö" name="yhteyshenkilö" value="{{ toimittaja.yhteyshenkilö }}" required>
+            </div>
+            <div class="form-group">
+                <label for="osoite">Osoite</label>
+                <input type="text" class="form-control" id="osoite" name="osoite" value="{{ toimittaja.osoite }}" required>
+            </div>
+            <div class="form-group">
+                <label for="puhelin">Puhelin</label>
+                <input type="tel" class="form-control" id="puhelin" name="puhelin" value="{{ toimittaja.puhelin }}" required>
+            </div>
+            <div class="form-group">
+                <label for="sähköposti">Sähköposti</label>
+                <input type="email" class="form-control" id="sähköposti" name="sähköposti" value="{{ toimittaja.sähköposti }}" required>
+            </div>
+            <div class="form-group">
+                <label for="maa">Maa</label>
+                <input type="text" class="form-control" id="maa" name="maa" value="{{ toimittaja.maa }}" required>
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Päivitä" class="btn btn-success btn-sm">
+                <a href="/toimittajat/" class="btn btn-secondary btn-sm">Peruuta</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

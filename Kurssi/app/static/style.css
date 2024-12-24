@@ -1,3 +1,28 @@
 h1 {
     color: darkviolet;
 }
+
+body {
+    background-color: #2f2f2f; /* Tumman harmaa väri */
+    color: white; /* Tekstin väri valkoinen, jotta se erottuu tummasta taustasta */
+}
+
+.container {
+    background-color: #2f2f2f; /* kontainerin tausta on tummanharmaa */
+}
+
+.center {
+    background-color: #2f2f2f; /* Asetetaan taustaväri myös keskitetylle sisällölle */
+}
+
+.center {
+    text-align: center; /* <center>-tagin käyttäminen (index.html) ei ole suositeltavaa, koska se on "vanhentunut HTML:ssä" kuulemma. Sen sijaan voi käyttää CSS:ää sisällön keskittämiseen. */
+}
+
+.card {
+    color: black; /* Asetetaan tekstin väri mustaksi */
+}
+
+.card-body {
+    color: black; /* Varmistetaan, että myös body-osan teksti on mustaa */
+}

@@ -12,12 +12,12 @@
 
                 {%csrf_token %}
                 <div class="form-group">
-                    <label>hinta</label>
-                    <input type="number" name="tuotehinta" value={{tuote.tuotehinta}}>
+                    <label>Hinta</label>
+                    <input type="number" name="kappalehinta" value="{{tuote.kappalehinta}}" step="0.01">
                 </div>
                 <div class="form-group">
-                    <label>varastossa</label>
-                    <input type="number" name="tuotteitavarastossa" value={{tuote.tuotteitavarastossa}}>
+                    <label>Varastossa</label>
+                    <input type="number" name="tuotteitavarastossa" value="{{tuote.tuotteitavarastossa}}" step="1">
                 </div>
                 <input type="submit" value="Update" class="btn btn-success btn-sm">
                 <input type="button" onclick="window.location.href='/tuotteet'" id="hide-btn"

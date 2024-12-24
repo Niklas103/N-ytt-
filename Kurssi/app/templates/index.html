@@ -26,26 +26,20 @@
 </head>
 <!-- #"Center" kaikki sisältö automaattisesti keskitetään -->
  <!-- # "Block content / endblock" sisälle (väliin) renderöidään kaikki muut sisältö sivut mitä tehdään -->
-<body>
-    <div class="container">
-        <center> 
-            <!-- # Navigointi buttonit -->
-            <div class="btn-group" role="group">
-                <a class="btn btn-warning btn-sm" href="/toimittajat">Tarkastele toimittajia</a>
-                <a class="btn btn-success btn-sm" href="/tuotteet">Tarkastele tuotteita</a>
-                <a class="btn btn-primary btn-sm" href="/admin">Admin sivut</a>
-                <a class="btn btn-danger btn-sm">Kirjaudu ulos</a>
-            </div>
+ <body>
+    <div class="container center">
+        <!-- # Navigointi buttonit -->
+        <div class="btn-group" role="group">
+            <a class="btn btn-warning btn-sm" href="/toimittajat">Tarkastele toimittajia</a>
+            <a class="btn btn-success btn-sm" href="/tuotteet">Tarkastele tuotteita</a>
+            <a class="btn btn-primary btn-sm" href="/admin">Admin sivut</a>
+            <a class="btn btn-danger btn-sm">Kirjaudu ulos</a>
+        </div>
 
-            {% block content %}
+        {% block content %}
 
-            {% endblock %}
-
-
-        </center>
-
+        {% endblock %}
     </div>
-
 </body>
 
 
