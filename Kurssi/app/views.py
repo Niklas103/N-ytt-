@@ -12,27 +12,25 @@ def loginview(request):
 
 # Login action
 def login_action(request):
-    user = request.POST['username']
-    passw = request.POST['password']
-    # Löytyykö kyseistä käyttäjää?
-    user = authenticate(username = user, password = passw)
-    #Jos löytyy:
-    if user:
-        # Kirjataan sisään
-        login(request, user)
-        # Tervehdystä varten context
-        context = {'name': user.first_name}
-        # Kutsutaan suoraan landingview.html
-        return render(request,'paasivu.html',context)
-    # Jos ei kyseistä käyttäjää löydy
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return render(request,'index.html')
+        else:
+            return render(request, 'loginerror.html')  # Jos kirjautuminen epäonnistuu, vie virhesivulle
     else:
-        return render(request, 'loginerror.html')
+        return render(request, 'loginpage.html')
+
 
 
 # Logout action
 def logout_action(request):
     logout(request)
-    return render(request, 'loginpage.html')
+    return redirect('loginpage')  # redirect to login page after logout
 
 # 'Request' on views näkymä funktioiden ensimmäinen parametri minkä ottavat vastaan
 

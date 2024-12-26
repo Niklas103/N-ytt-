@@ -26,9 +26,10 @@ from .views import toimittajapoisto, vahvistatoimittajapoisto, edit_toimittaja_p
 urlpatterns = [
   
     # Login & logout
-    path('', loginview),
-    path('login/', login_action),
-    path('logout/', logout_action),
+    # Annetaan nimi ("name") näkymille joihin voi viitata helposti.
+    path('', loginview, name='loginpage'),  # Kirjautumissivu
+    path('login/', login_action, name='login_action'),  # Kirjautumistoiminto
+    path('logout/', logout_action, name='logout_action'),  # Uloskirjautumistoiminto
 
      # Tuote url´s
     path('tuotteet/', tuotelistaview),

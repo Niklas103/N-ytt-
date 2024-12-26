@@ -2,22 +2,25 @@
 <html>
 
 <head>
-    <title>Products and vendors</title>
+    <title>Simon S-Rauta</title>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Bootstrapin linkki -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <!-- Font Awesome ikoneita varten -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <!-- Oma tyylitiedosto -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
@@ -31,7 +34,7 @@
 
                     <div class="card-body">
                         <input type="button" onclick="window.location.href='/'" id="hide-btn"
-                            class="btn btn-secondary btn-sm" value="Try again">
+                            class="btn btn-primary btn-sm" value="Yritä uudestaan">
 
                     </div>
                 </div>

@@ -3,7 +3,7 @@
  <html>
 
 <head>
-    <title>Products and vendors</title> 
+    <title>Simon S-Rauta</title> 
 
     <meta charset="UTF-8">
 
@@ -33,7 +33,11 @@
             <a class="btn btn-warning btn-sm" href="/toimittajat">Tarkastele toimittajia</a>
             <a class="btn btn-success btn-sm" href="/tuotteet">Tarkastele tuotteita</a>
             <a class="btn btn-primary btn-sm" href="/admin">Admin sivut</a>
-            <a class="btn btn-danger btn-sm">Kirjaudu ulos</a>
+        <!-- Logout-nappi lomakkeella -->
+            <form action="{% url 'logout_action' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Kirjaudu ulos</button>
+            </form>
         </div>
 
         {% block content %}
