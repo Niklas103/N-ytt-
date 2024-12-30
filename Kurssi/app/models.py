@@ -2,6 +2,8 @@
 
 # Django databasesta importataan modelit
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 # Model on djangon database tyyppinen model luokka
 class Toimittaja(models.Model):
@@ -43,3 +45,30 @@ class Varasto(models.Model):
 
     def __str__(self):
         return f"{self.tuotenimi} in storage"
+
+# Tallennetaan yksittäinen tuote varastoon ennen sen poistoa
+@receiver(pre_delete, sender=Tuote)  # Korjattu signaalin nimi
+def tallenna_varastoon_tuote_ennen_poisto(sender, instance, **kwargs):
+    Varasto.objects.create(
+        tuotenimi=instance.tuotenimi,
+        painoperkappale=instance.painoperkappale,
+        kappalehinta=instance.kappalehinta,
+        tuotteitavarastossa=instance.tuotteitavarastossa,
+        toimittaja_nimi=instance.toimittaja.yritysnimi if instance.toimittaja else None,
+        toimittaja_maa=instance.toimittaja.maa if instance.toimittaja else None,
+    )
+
+
+# Tallennetaan kaikki toimittajan tuotteet varastoon ennen toimittajan poistoa
+@receiver(pre_delete, sender=Toimittaja)  # Korjattu signaalin nimi
+def tallenna_varastoon_tuote_ennen_toimittaja_poisto(sender, instance, **kwargs):
+    tuotteet = Tuote.objects.filter(toimittaja=instance)
+    for tuote in tuotteet:
+        Varasto.objects.create(
+            tuotenimi=tuote.tuotenimi,
+            painoperkappale=tuote.painoperkappale,
+            kappalehinta=tuote.kappalehinta,
+            tuotteitavarastossa=tuote.tuotteitavarastossa,
+            toimittaja_nimi=instance.yritysnimi,
+            toimittaja_maa=instance.maa,
+        )

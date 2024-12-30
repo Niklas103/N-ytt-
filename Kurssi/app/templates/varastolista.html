@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="varasto-title">Varasto</h2>
+    <table class="table varasto-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tuotenimi</th>
+                <th>Paino per kappale</th>
+                <th>Kappalehinta (€)</th>
+                <th>Kappaleita varastossa</th>
+                <th>Toimittajan nimi</th>
+                <th>Toimittajan maa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for varasto in varastot %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ varasto.tuotenimi }}</td>
+                <td>{{ varasto.painoperkappale }}</td>
+                <td>{{ varasto.kappalehinta }}</td>
+                <td>{{ varasto.tuotteitavarastossa }}</td>
+                <td>{{ varasto.toimittaja_nimi|default:"Ei tiedossa" }}</td>
+                <td>{{ varasto.toimittaja_maa|default:"Ei tiedossa" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">Ei tuotteita varastossa</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

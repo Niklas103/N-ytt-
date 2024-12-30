@@ -12,24 +12,17 @@
 <a onclick="showaddform()" class="btn btn-primary">Lisää uusi tuote</a>
 
 {% for p in tuotteet %}
-
 <div class="card" style="width: 50rem;">
     <div class="card-body">
-        <h3 class="card-title">{{p.tuotenimi}} </h3>
-        <h5 class="card-text">Toimittaja: {{p.toimittaja.yritysnimi}}</h5>
-        <p class="card-text">Tuote paino: {{p.k}} | painoperkappale: {{p.painoperkappale}}</p>
-        <p class="card-text" style="color: green;">Määrä varastossa: {{p.tuotteitavarastossa}}</p>
-        <a href="/edit-tuote-get/{{p.id}}/" class="btn btn-primary">Muokkaa</a>
-
-        <a href="/vahvista-tuote-poisto/{{p.id}}/" class="btn btn-danger">Poista</a>
-
-        <a href="/tuote-toimittajan-mukaan/{{p.toimittaja.id}}/" class="btn btn-secondary">{{p.toimittaja.yritysnimi}} kaikki
-            tuotteet</a>
-
+        <h3 class="card-title">{{ p.tuotenimi }}</h3>
+        <h5 class="card-text">Toimittaja: {{ p.toimittaja.yritysnimi }}</h5>
+        <p class="card-text">Tuotteen hinta: {{ p.kappalehinta }} euroa</p>
+        <p class="card-text">Tuotteen paino: {{ p.painoperkappale }}</p>
+        <p class="card-text" style="color: green;">Määrä varastossa: {{ p.tuotteitavarastossa }}</p>
+        <a href="/edit-tuote-get/{{ p.id }}/" class="btn btn-primary">Muokkaa</a>
+        <a href="/vahvista-tuote-poisto/{{ p.id }}/" class="btn btn-danger">Poista</a>
     </div>
 </div>
-
-
 {% empty %}
 
 <div class="card" style="width: 50rem;">
@@ -39,6 +32,10 @@
 </div>
 
 {%endfor%}
+
+<!-- Takaisin toimittajalistaukseen -->
+<a href="/toimittajat/" class="btn btn-secondary">Takaisin toimittajalistaukseen</a>
+
 
 
 <script>

@@ -26,3 +26,35 @@ body {
 .card-body {
     color: black; /* Varmistetaan, että myös body-osan teksti on mustaa */
 }
+
+/* Varasto-otsikon väri */
+.varasto-title {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Varastotaulukon muotoilu */
+.varasto-table {
+    width: 100%;
+    background-color: #2f2f2f; /* Taulukon taustaväri */
+    color: white; /* Tekstin väri */
+    border: 1px solid #444; /* Reunaviiva */
+}
+
+/* Otsikon rivin muotoilu */
+.varasto-table thead tr {
+    background-color: #444; /* Tummanharmaa otsikkorivi */
+    color: white; /* Valkoinen teksti */
+}
+
+/* Taulukon rivien hover-efekti */
+.varasto-table tbody tr:hover {
+    background-color: #555; /* Vaaleampi harmaa hover-tila */
+}
+
+/* Taulukon soluissa oleva teksti */
+.varasto-table tbody td {
+    padding: 10px;
+    color: white;
+}

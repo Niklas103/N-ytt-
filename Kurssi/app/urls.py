@@ -21,6 +21,7 @@ from .views import lisäätoimittaja, lisäätuote, tuotepoisto, vahvistatuotepo
 from .views import edit_tuote_get, edit_tuote_post, etsitoimittaja
 from .views import loginview, login_action, logout_action
 from .views import toimittajapoisto, vahvistatoimittajapoisto, edit_toimittaja_post, edit_toimittaja_get
+from .views import varastolistaview
 
 # syntaksi: Mikä osoite polku: '' sovelluksen juuri: landingview (renderöidään landingview). App kansion sisältä, view tiedostosta importataan landingview
 urlpatterns = [
@@ -38,7 +39,7 @@ urlpatterns = [
     path('vahvista-tuote-poisto/<int:id>/', vahvistatuotepoisto),
     path('edit-tuote-get/<int:id>/', edit_tuote_get),
     path('edit-tuote-post/<int:id>/', edit_tuote_post),
-    path('tuote-toimittajan-mukaan/<int:id>/', tuotteet_filtered),
+    path('tuote-toimittajan-mukaan/<int:id>/', tuotteet_filtered, name='tuotteet_filtered'),
 
     # Toimittaja url´s
     path('toimittajat/', toimittajalistaview),
@@ -49,5 +50,7 @@ urlpatterns = [
     path('edit-toimittaja-post/<int:id>/', edit_toimittaja_post, name='edit_toimittaja_post'),
     path('edit-toimittaja-get/<int:id>/', edit_toimittaja_get, name='edit_toimittaja_get'),
 
+    # Varasto url's
+    path('varasto/', varastolistaview, name='varasto'),
 
 ]

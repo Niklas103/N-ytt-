@@ -1,7 +1,7 @@
 # Render = Renderöidään tietty html templates kansiosta
 # Redirect = Ohjataan ohjelman suoritus johonkin toiseen view functioon
 from django.shortcuts import render, redirect
-from .models import Toimittaja, Tuote
+from .models import Toimittaja, Tuote, Varasto
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
@@ -94,15 +94,13 @@ def edit_tuote_post(request, id):
         item.save()
         return redirect(tuotelistaview)
 
-
 def tuotteet_filtered(request, id):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
     else:
-        tuotelista = Tuote.objects.all()
-        filteredtuotteet = tuotelista.filter(toimittaja = id)
-        context = {'tuotteet': tuotteet_filtered}
-        return render (request,"tuotelista.html",context)
+        filteredtuotteet = Tuote.objects.filter(toimittaja_id=id)
+        context = {'tuotteet': filteredtuotteet}
+        return render(request, "tuotelista.html", context)
 
 
 
@@ -182,3 +180,9 @@ def edit_toimittaja_get(request, id):
             return render(request, 'edit_toimittaja.html', {'toimittaja': toimittaja})  # Lähetetään tiedot lomakkeelle
         except Toimittaja.DoesNotExist:
             return render(request, 'error.html', {'message': 'Toimittajaa ei löytynyt!'})  # Jos toimittajaa ei löydy
+
+
+# Varasto views
+def varastolistaview(request):
+    varastot = Varasto.objects.all()
+    return render(request, 'varastolista.html', {'varastot': varastot})
