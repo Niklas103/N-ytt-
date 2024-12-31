@@ -18,7 +18,7 @@ from django.urls import path
 
 from .views import tuotelistaview, toimittajalistaview, tuotteet_filtered
 from .views import lisäätoimittaja, lisäätuote, tuotepoisto, vahvistatuotepoisto
-from .views import edit_tuote_get, edit_tuote_post, etsitoimittaja
+from .views import edit_tuote_get, edit_tuote_post, etsitoimittaja, etsi_tuote
 from .views import loginview, login_action, logout_action
 from .views import toimittajapoisto, vahvistatoimittajapoisto, edit_toimittaja_post, edit_toimittaja_get
 from .views import varastolistaview
@@ -40,6 +40,7 @@ urlpatterns = [
     path('edit-tuote-get/<int:id>/', edit_tuote_get),
     path('edit-tuote-post/<int:id>/', edit_tuote_post),
     path('tuote-toimittajan-mukaan/<int:id>/', tuotteet_filtered, name='tuotteet_filtered'),
+    path('etsi-tuote/', etsi_tuote, name='etsi_tuote'),
 
     # Toimittaja url´s
     path('toimittajat/', toimittajalistaview),

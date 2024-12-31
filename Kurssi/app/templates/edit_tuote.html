@@ -1,31 +1,38 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} <!-- Laajentaa index.html:ää, jolloin saadaan samat perusrakenteet ja tyylit -->
 
-{% block content %}
+{% block content %} <!-- Tässä kohtaa lisätään sivun erityinen sisältö -->
 
 <div class="card" style="width: 25rem;">
     <div class="card-header">
-
+        <!-- Näyttää tuotteen nimen ja toimittajan nimen -->
         <h5>Muokkaa {{tuote.tuotenimi}} jota toimittaa {{tuote.toimittaja.yritysnimi}}</h5>
 
         <div class="card-body">
-            <form method="post" action="/edit-tuote-post/{{tuote.id}}/">
+            <!-- Lomake, jolla voi muokata tuotteen tietoja -->
+            <form method="post" action="/edit-tuote-post/{{tuote.id}}/"> <!-- Lähettää POST-pyynnön tuote-id:llä -->
 
-                {%csrf_token %}
+                {%csrf_token %} <!-- CSRF-turvamerkki -->
+
+                <!-- Lomakekentät, joissa näkyy tuotteen nykyiset tiedot ja joita voi muokata -->
                 <div class="form-group">
                     <label>Hinta</label>
-                    <input type="number" name="kappalehinta" value="{{tuote.kappalehinta}}" step="0.01">
+                    <input type="number" name="kappalehinta" value="{{tuote.kappalehinta}}" step="0.01"> <!-- Hinta kenttä, jossa voi muokata hintaa -->
                 </div>
                 <div class="form-group">
                     <label>Varastossa</label>
-                    <input type="number" name="tuotteitavarastossa" value="{{tuote.tuotteitavarastossa}}" step="1">
+                    <input type="number" name="tuotteitavarastossa" value="{{tuote.tuotteitavarastossa}}" step="1"> <!-- Varastomäärä kenttä -->
                 </div>
-                <input type="submit" value="Update" class="btn btn-success btn-sm">
+
+                <!-- Lomakkeen lähetyspainike -->
+                <input type="submit" value="Update" class="btn btn-success btn-sm"> <!-- Päivitä-nappi -->
+
+                <!-- Peruuta-painike, joka vie käyttäjän tuotteet-sivulle -->
                 <input type="button" onclick="window.location.href='/tuotteet'" id="hide-btn"
-                    class="btn btn-secondary btn-sm" value="Cancel">
+                    class="btn btn-secondary btn-sm" value="Cancel"> <!-- Peruuta-nappi -->
             </form>
         </div>
     </div>
 </div>
 
 
-{% endblock %}
+{% endblock %} <!-- Lopettaa content-blockin ja lisää tämän sisällön index.html-sivulle -->

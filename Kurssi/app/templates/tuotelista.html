@@ -11,6 +11,13 @@
 
 <a onclick="showaddform()" class="btn btn-primary">Lisää uusi tuote</a>
 
+<form method="post" action="/etsi-tuote/">
+    {% csrf_token %}
+    <input class="card-text" type="text" placeholder="Hae tuotetta" name="search">
+    <input type="submit" value="Hae" class="btn btn-success btn-sm">
+</form>
+
+
 {% for p in tuotteet %}
 <div class="card" style="width: 50rem;">
     <div class="card-body">

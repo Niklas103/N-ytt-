@@ -3,46 +3,47 @@
  <html>
 
 <head>
-    <title>Simon S-Rauta</title> 
+    <title>Simon S-Rauta</title> <!-- Otsikko, joka näkyy selainikkunassa -->
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- Määrittää merkistökoodauksen, jotta erikoismerkit näkyvät oikein -->
 
-    <meta name="viewport" contents="width=device-width, initial-scale=1.0">
+    <meta name="viewport" contents="width=device-width, initial-scale=1.0"> <!-- Responsiivisuus eri näyttöleveyksille -->
 <!-- # Navigointi nappien viittaukset jotta toimii -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+ <!-- Linkki Bootstrapin tyylitiedostoon -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> <!-- Bootstrapin integraatio -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"> <!-- Font Awesome ikonit -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> <!-- Popper.js, Bootstrapin toiminnallisuus -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrapin JavaScript -->
 
 <!-- # Tuodaan tyylit ulkoisesta css tiedostosta -->
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> <!-- Omaan projektiin liittyvät tyylit -->
 
 
 </head>
 <!-- #"Center" kaikki sisältö automaattisesti keskitetään -->
- <!-- # "Block content / endblock" sisälle (väliin) renderöidään kaikki muut sisältö sivut mitä tehdään -->
- <body>
+<!-- # "Block content / endblock" sisälle (väliin) renderöidään kaikki muut sisältö sivut mitä tehdään -->
+<body>
     <div class="container center">
         <!-- # Navigointi buttonit -->
         <div class="btn-group" role="group">
-            <a class="btn btn-warning btn-sm" href="/toimittajat">Tarkastele toimittajia</a>
-            <a class="btn btn-success btn-sm" href="/tuotteet">Tarkastele tuotteita</a>
-            <a class="btn btn-success btn-sm" href="/varasto">Varasto</a>
-            <a class="btn btn-primary btn-sm" href="/admin">Admin sivut</a>
+            <a class="btn btn-warning btn-sm" href="/toimittajat">Tarkastele toimittajia</a> <!-- Linkki toimittajat-sivulle -->
+            <a class="btn btn-success btn-sm" href="/tuotteet">Tarkastele tuotteita</a> <!-- Linkki tuotteet-sivulle -->
+            <a class="btn btn-success btn-sm" href="/varasto">Varasto</a> <!-- Linkki varasto-sivulle -->
+            <a class="btn btn-primary btn-sm" href="/admin">Admin sivut</a> <!-- Linkki admin-sivulle -->
         <!-- Logout-nappi lomakkeella -->
-            <form action="{% url 'logout_action' %}" method="post" style="display: inline;">
+            <form action="{% url 'logout_action' %}" method="post" style="display: inline;"> <!-- Formi käyttäjän uloskirjautumista varten -->
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger btn-sm">Kirjaudu ulos</button>
+                <button type="submit" class="btn btn-danger btn-sm">Kirjaudu ulos</button> <!-- Uloskirjautumispainike -->
             </form>
         </div>
 
         {% block content %}
-
+        <!-- Tässä kohtaa renderöidään muiden sivujen sisältö -->
         {% endblock %}
     </div>
 </body>

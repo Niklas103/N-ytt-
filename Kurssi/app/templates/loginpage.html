@@ -2,22 +2,23 @@
 <html>
 
 <head>
-    <title>Simon S-Rauta</title>
+    <title>Simon S-Rauta</title> <!-- Sivun otsikko, joka näkyy selainikkunassa -->
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <!-- Merkistökoodaus, joka varmistaa, että erikoismerkit näkyvät oikein -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsiivisuus, varmistaa sivun toimivuuden eri laitteilla -->
 
-    <!-- Bootstrapin linkki -->
+   <!-- Bootstrapin CSS linkki, joka tuo valmiit tyylit (esim. napit, kortit) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <!-- Font Awesome ikoneita varten -->
+    <!-- Font Awesome ikoneiden käyttämistä varten -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
-    <!-- Oma tyylitiedosto -->
+    <!-- Oma tyylitiedosto, jossa voi olla mukautettuja tyylejä -->
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
+<!-- jQuery, Popper.js ja Bootstrapin JavaScript, jotka tukevat sivun toiminnallisuuksia (esim. dropdownit, modaalit) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -25,43 +26,54 @@
 </head>
 
 <body>
-    <div class="container">
-        <center>
+    <div class="container"> <!-- Bootstrapin säilö, joka auttaa keskittämään sisältöä -->
+        <center> <!-- Sisällön keskittäminen -->
 
+            <!-- Kirjautumislomake, jossa on kortti, joka pitää sisällään lomakkeen -->
             <div class="card" style="width: 25rem; margin-top: 50px;">
 
                 <div class="card-header">
 
-                    <h5>Kirjaudu sisään</h5>
+                    <h5>Kirjaudu sisään</h5> <!-- Otsikko, joka kertoo käyttäjälle, että kyseessä on kirjautumissivu -->
 
                     <div class="card-body">
+                        <!-- Lomake, jossa käyttäjä voi syöttää tunnus- ja salasanatietonsa -->
 
                         <form id="myForm" method="post" action="/login/">
 
-                            {% csrf_token %}
+                            {% csrf_token %} <!-- CSRF-turvamerkki, joka estää CSRF-hyökkäykset -->
+
+                            <!-- Käyttäjätunnuskenttä -->
                             <div class="form-group">
                                 <label>Käyttäjätunnus</label>
-                                <input autofocus type="text" name="username">
+                                <input autofocus type="text" name="username"> <!-- Autofocus tekee tämän kentästä valitun alussa -->
                             </div>
+
+                            <!-- Salasanakenttä -->
                             <div class="form-group">
                                 <label>Salasana</label>
-                                <input type="password" name="password">
+                                <input type="password" name="password"> <!-- Salasanakenttä, joka peittää syötteen -->
                             </div>
 
+                            <!-- Kirjautumispainike -->
                             <input type="submit" value="Login" class="btn btn-success btn-sm">
 
+                            <!-- Reset-painike, joka tyhjentää lomakkeen kentät -->
                             <input type="button" onclick="reset()" class="btn btn-secondary btn-sm" value="Reset">
 
                         </form>
                     </div>
+
+                    <!-- Admin-sivuille siirtymispainike -->
                     <input type="button" onclick="window.location.href='/admin/'" class="btn btn-warning btn-sm"
                         value="Admin pages">
                 </div>
             </div>
 
+            <!-- JavaScript-funktio reset, joka nollaa lomakkeen kentät -->
             <script>
                 function reset() {
-                    document.getElementById("myForm").reset()
+                    document.getElementById("myForm").reset() 
                 }
             </script>
 

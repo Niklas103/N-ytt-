@@ -102,6 +102,14 @@ def tuotteet_filtered(request, id):
         context = {'tuotteet': filteredtuotteet}
         return render(request, "tuotelista.html", context)
 
+def etsi_tuote(request):
+    if not request.user.is_authenticated:
+        return render(request, 'loginpage.html')
+    else:
+        search = request.POST.get('search', '')  # Hae hakutermi POST-data
+        filtered = Tuote.objects.filter(tuotenimi__icontains=search)  # Suodata tuotteet
+        context = {'tuotteet': filtered}  # Lisää suodatetut tuotteet kontekstiin
+        return render(request, "tuotelista.html", context)
 
 
 # Toimittaja views

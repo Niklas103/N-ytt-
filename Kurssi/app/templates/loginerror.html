@@ -2,14 +2,14 @@
 <html>
 
 <head>
-    <title>Simon S-Rauta</title>
+    <title>Simon S-Rauta</title> <!-- Sivun otsikko -->
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <!-- Merkistökoodaus, jotta erikoismerkit näkyvät oikein -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsiivisuus, jotta sivu toimii eri laitteilla -->
 
-    <!-- Bootstrapin linkki -->
+    <!-- Bootstrapin tyylit -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> <!-- Bootstrapin CSS -->
 
     <!-- Font Awesome ikoneita varten -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
@@ -18,6 +18,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
+     <!-- jQuery, Popper.js ja Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -25,16 +26,17 @@
 
 <body>
     <div class="container">
-        <center>
+        <center> <!-- Sisällön keskittäminen -->
 
-            <div class="card" style="width: 25rem; margin-top: 50px;">
+            <!-- Virheilmoituslomake -->
+            <div class="card" style="width: 25rem; margin-top: 50px;"> <!-- Kortti, jossa virheilmoitus -->
                 <div class="card-header">
 
-                    <h4>Käyttäjätunnus ja/tai salasana on väärä</h4>
+                    <h4>Käyttäjätunnus ja/tai salasana on väärä</h4> <!-- Virheilmoitus, joka kerrotaan käyttäjälle -->
 
                     <div class="card-body">
                         <input type="button" onclick="window.location.href='/'" id="hide-btn"
-                            class="btn btn-primary btn-sm" value="Yritä uudestaan">
+                            class="btn btn-primary btn-sm" value="Yritä uudestaan"> <!-- Palauttaa käyttäjän kirjautumissivulle -->
 
                     </div>
                 </div>

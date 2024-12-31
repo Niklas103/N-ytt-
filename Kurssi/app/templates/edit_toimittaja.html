@@ -1,15 +1,17 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} <!-- Laajentaa index.html:ää, jolloin perusrakenne ja tyylit saadaan käyttöön -->
 
-{% block content %}
+{% block content %} <!-- Tässä kohtaa lisätään sisältö, joka korvataan index.html:n block content -osassa -->
 
-<div class="card" style="width: 25rem; margin: auto; margin-top: 20px;">
+<div class="card" style="width: 25rem; margin: auto; margin-top: 20px;"> <!-- Lomake toimittajan muokkaamiseen -->
     <div class="card-header text-center">
 
-        <h5>Muokkaa toimittajaa: {{ toimittaja.yritysnimi }}</h5>
+        <h5>Muokkaa toimittajaa: {{ toimittaja.yritysnimi }}</h5> <!-- Näyttää muokattavan toimittajan nimen -->
     </div>
     <div class="card-body">
-        <form method="post" action="/edit-toimittaja-post/{{ toimittaja.id }}/">
-            {% csrf_token %}
+        <form method="post" action="/edit-toimittaja-post/{{ toimittaja.id }}/"> <!-- Lähettää POST-pyynnön -->
+            {% csrf_token %} <!-- CSRF-turvamerkki -->
+
+            <!-- Lomakekentät, jotka esittävät nykyisiä toimittajan tietoja, joita voidaan muokata -->
             <div class="form-group">
                 <label for="yritysnimi">Yritysnimi</label>
                 <input type="text" class="form-control" id="yritysnimi" name="yritysnimi" value="{{ toimittaja.yritysnimi }}" required>
@@ -35,10 +37,11 @@
                 <input type="text" class="form-control" id="maa" name="maa" value="{{ toimittaja.maa }}" required>
             </div>
             <div class="text-center">
+                <!-- Lähetyspainike ja peruuta-painike -->
                 <input type="submit" value="Päivitä" class="btn btn-success btn-sm">
-                <a href="/toimittajat/" class="btn btn-secondary btn-sm">Peruuta</a>
+                <a href="/toimittajat/" class="btn btn-secondary btn-sm">Peruuta</a> <!-- Peruuta vie takaisin toimittajalistalle -->
             </div>
         </form>
     </div>
 </div>
-{% endblock %}
+{% endblock %} <!-- Lopettaa blockin, jolloin sisältö lisätään index.html:ään -->
