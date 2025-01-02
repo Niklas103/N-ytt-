@@ -1,98 +1,99 @@
 # Render = Renderöidään tietty html templates kansiosta
 # Redirect = Ohjataan ohjelman suoritus johonkin toiseen view functioon
-from django.shortcuts import render, redirect
-from .models import Toimittaja, Tuote, Varasto
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect # Näkymien käsittelyyn
+from .models import Toimittaja, Tuote, Varasto # Mallit tietokantakyselyihin
+from django.contrib.auth import authenticate, login, logout # Käyttäjäautentikointi
 # Create your views here.
 
-# Loginpage
+# Login-sivun näkymä
 def loginview(request):
-    return render (request, "loginpage.html")
+    return render (request, "loginpage.html") # Näyttää kirjautumissivun HTML-mallin
 
 
-# Login action
+# Kirjautumisprosessi
 def login_action(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
+    if request.method == "POST": # Tarkistaa, onko pyyntö POST-tyyppiä
+        username = request.POST['username'] # Hakee käyttäjänimen syötteestä
+        password = request.POST['password'] # Hakee salasanan syötteestä
+        user = authenticate(username=username, password=password) # Tarkistaa, vastaako käyttäjänimi ja salasana tietoja
 
-        if user is not None:
-            login(request, user)
-            return render(request,'index.html')
+        if user is not None: # Jos käyttäjä on olemassa
+            login(request, user) # Kirjaa käyttäjän sisään
+            return render(request,'index.html') # Vie käyttäjä etusivulle
         else:
             return render(request, 'loginerror.html')  # Jos kirjautuminen epäonnistuu, vie virhesivulle
     else:
-        return render(request, 'loginpage.html')
+        return render(request, 'loginpage.html') # Näyttää kirjautumissivun, jos pyyntö ei ole POST
 
 
 
-# Logout action
+# Kirjautumisen uloskirjautuminen
 def logout_action(request):
-    logout(request)
-    return redirect('loginpage')  # redirect to login page after logout
+    logout(request) # Kirjaa käyttäjän ulos
+    return redirect('loginpage')  # Ohjaa käyttäjän takaisin kirjautumissivulle
 
 # 'Request' on views näkymä funktioiden ensimmäinen parametri minkä ottavat vastaan
 
 # Tuote views
 def tuotelistaview(request):
-    if not request.user.is_authenticated:
-        return render(request, 'loginpage.html')
+    if not request.user.is_authenticated: # Tarkistaa, onko käyttäjä kirjautunut sisään
+        return render(request, 'loginpage.html') # Vie kirjautumissivulle, jos käyttäjä ei ole kirjautunut
     else:
-        tuotelista = Tuote.objects.all()
-        toimittajalista = Toimittaja.objects.all()
-        context = {'tuotteet': tuotelista, 'toimittajat': toimittajalista}
-        return render (request,"tuotelista.html",context)
+        tuotelista = Tuote.objects.all() # Hakee kaikki Tuote-taulun tiedot tietokannasta
+        toimittajalista = Toimittaja.objects.all() # Hakee kaikki Toimittaja-taulun tiedot
+        context = {'tuotteet': tuotelista, 'toimittajat': toimittajalista} # Lisää tiedot kontekstiin
+        return render (request,"tuotelista.html",context) # Näyttää tuotelistausmallin
 
 
 def lisäätuote(request):
     if not request.user.is_authenticated:
-        return render(request, 'loginpage.html')
+        return render(request, 'loginpage.html') # Vie kirjautumissivulle, jos käyttäjä ei ole kirjautunut
     else:
-        a = request.POST['tuotenimi']
-        b = request.POST['painoperkappale']
+        a = request.POST['tuotenimi'] # Hakee tuotteen nimen lomakesyötteestä
+        b = request.POST['painoperkappale'] # Hakee tuotteen painon syötteestä
         c = request.POST['kappalehinta'].replace(',', '.')  # Muunna pilkku pisteeksi
-        d = request.POST['tuotteitavarastossa']
-        e = request.POST['toimittaja']
+        d = request.POST['tuotteitavarastossa'] # Hakee kappalemäärän syötteestä
+        e = request.POST['toimittaja'] # Hakee toimittajan id:n syötteestä
     
-        Tuote(tuotenimi = a, painoperkappale = b, kappalehinta = c, tuotteitavarastossa = d, toimittaja = Toimittaja.objects.get(id = e)).save()
-        return redirect(request.META['HTTP_REFERER'])
+        # Luo uuden Tuote-objektin ja tallentaa sen tietokantaan
+        Tuote(tuotenimi = a, painoperkappale = b, kappalehinta = c, tuotteitavarastossa = d, toimittaja = Toimittaja.objects.get(id = e)).save() # Hakee toimittajan id:n perusteella
+        return redirect(request.META['HTTP_REFERER']) # Ohjaa käyttäjän takaisin edelliselle sivulle
 
 def vahvistatuotepoisto(request, id):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
     else:
-        tuote = Tuote.objects.get(id = id)
-        context = {'tuote': tuote}
-        return render (request,"tuotepoisto.html",context)
+        tuote = Tuote.objects.get(id = id) # Hakee tuotteen id:n perusteella
+        context = {'tuote': tuote}  # Lisää tuotteen tiedot kontekstiin
+        return render (request,"tuotepoisto.html",context) # Näyttää poiston vahvistusmallin
 
 
 def tuotepoisto(request, id):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
     else:
-        Tuote.objects.get(id = id).delete()
-        return redirect(tuotelistaview)
+        Tuote.objects.get(id = id).delete() # Poistaa tuotteen id:n perusteella
+        return redirect(tuotelistaview) # Ohjaa käyttäjän takaisin tuotelistaan
 
 
 def edit_tuote_get(request, id):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
     else:
-        tuote = Tuote.objects.get(id = id)
-        context = {'tuote': tuote}
-        return render (request,"edit_tuote.html",context)
+        tuote = Tuote.objects.get(id = id) # Hakee muokattavan tuotteen
+        context = {'tuote': tuote} # Lisää tiedot kontekstiin
+        return render (request,"edit_tuote.html",context) # Näyttää tuotteen muokkauslomakkeen
 
 
 def edit_tuote_post(request, id):
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
     else:
-        item = Tuote.objects.get(id = id)
+        item = Tuote.objects.get(id = id) # Hakee tuotteen id:n perusteella
         item.kappalehinta = request.POST['kappalehinta']
         item.tuotteitavarastossa = request.POST['tuotteitavarastossa']
-        item.save()
-        return redirect(tuotelistaview)
+        item.save() # Tallentaa muutokset tietokantaan
+        return redirect(tuotelistaview) # Ohjaa takaisin tuotelistaukseen
 
 def tuotteet_filtered(request, id):
     if not request.user.is_authenticated:

@@ -1,32 +1,34 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} <!-- Laajentaa pohjasivun (index.html), joten yhteiset osat tulevat automaattisesti -->
 
-{% block content %}
+{% block content %} <!-- Sisältöosa, joka korvaa pohjasivun "content"-osion -->
 
 <br />
-<div id="add-div"></div>
+<div id="add-div"></div> <!-- Tyhjä div, johon JavaScript luo lomakkeen toimittajan lisäämistä varten -->
 <br />
 
-<h1 style="color: darkviolet">Toimittajat</h1>
+<h1 style="color: darkviolet">Toimittajat</h1> <!-- Otsikko, joka erottuu tumman violetilla värillä -->
 
+<!-- Lisää uusi toimittaja -painike, joka kutsuu JavaScript-funktiota "showaddform" -->
 <button id="add-btn" class="btn btn-success btn-sm" onclick="showaddform()">Lisää uusi toimittaja</button>
 
-<!-- # Form lähettää search suppliers urliin pyynnön (formin sisältö mukaan "name=search" sisältö) -->
+<!-- Haku-lomake, joka lähettää POST-pyynnön "/etsi-toimittaja/" URL-osoitteeseen -->
         <form method="post" action="/etsi-toimittaja/">
 
-            {%csrf_token %}
-            <input class="card-text" class="card-text" type="text" placeholder="search" name="search">
+            {%csrf_token %} <!-- CSRF-turvatoken -->
+            <input class="card-text" class="card-text" type="text" placeholder="search" name="search"> <!-- Hakukenttä -->
 
-            <input type="submit" value="Search" class="btn btn-success btn-sm" name="">
+            <input type="submit" value="Search" class="btn btn-success btn-sm" name=""> <!-- Hakupainike -->
         </form>
   
-
+<!-- Toimittajien listaus -->
 {% for s in toimittajat %}
-<div class="card" style="width: 50rem;">
+<div class="card" style="width: 50rem;"> <!-- Kortti, joka näyttää yhden toimittajan tiedot -->
     <div class="card-body">
-        <h4 class="card-title">{{s.yritysnimi}}</h4>
-        <p class="card-text">Yhteyshenkilö: {{s.yhteyshenkilö}} | Puhelin: {{s.puhelin}} | S-posti: {{s.sähköposti}} </p>
-        <p class="card-text">Osoite: {{s.osoite}} | Maa: {{s.maa}}</p>
+        <h4 class="card-title">{{s.yritysnimi}}</h4> <!-- Toimittajan yritysnimi -->
+        <p class="card-text">Yhteyshenkilö: {{s.yhteyshenkilö}} | Puhelin: {{s.puhelin}} | S-posti: {{s.sähköposti}} </p> <!-- Yhteystiedot -->
+        <p class="card-text">Osoite: {{s.osoite}} | Maa: {{s.maa}}</p> <!-- Osoite ja maa -->
 
+        <!-- Toimintopainikkeet: muokkaa, poista ja tarkastele tuotteita -->
         <a href="/edit-toimittaja-get/{{s.id}}/" class="btn btn-primary">Muokkaa</a>
         <a href="/vahvista-toimittaja-poisto/{{s.id}}/" class="btn btn-danger">Poista</a>
         <a href="/tuote-toimittajan-mukaan/{{s.id}}/" class="btn btn-secondary">{{s.yritysnimi}} Tuotteet</a>
@@ -34,11 +36,11 @@
 </div>
 
 
-{%endfor%}
+{%endfor%} <!-- Käydään läpi kaikki toimittajat ja luodaan kortti jokaiselle -->
 
 <!-- #Javascript -->
 <script>
-
+// Lomake HTML-muodossa, joka näytetään toimittajan lisäämistä varten
     let x = `
     <h2 style="color: lightblue">Täytä tiedot</h2>
     
@@ -60,14 +62,16 @@
         </div>
     </div>`
 
+    // Näyttää lomakkeen asettamalla sen "add-div"-divin sisällöksi
     function showaddform() {
         document.getElementById("add-div").innerHTML = x
     }
 
+    // Piilottaa lomakkeen tyhjentämällä "add-div"-divin sisällön
     function hideaddform() {
         document.getElementById("add-div").innerHTML = ""
     }
 
 </script>
 
-{% endblock %}
+{% endblock %} <!-- Lopettaa "content"-osion -->

@@ -1,37 +1,41 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} <!-- Laajentaa index.html-pohjan yhteisille elementeille -->
 
-{% block content %}
+{% block content %} <!-- Määrittelee tämän sivun sisällön -->
 
 <br />
 <!-- Lisäyslomakkeen paikka -->
 <div id="add-div"></div>
 <br />
 
-<h1>Tuotteet</h1>
+<h1>Tuotteet</h1> <!-- Sivun otsikko -->
 
+<!-- Painike, joka avaa lisäyslomakkeen -->
 <a onclick="showaddform()" class="btn btn-primary">Lisää uusi tuote</a>
 
+<!-- Lomake tuotteen hakemiseksi -->
 <form method="post" action="/etsi-tuote/">
-    {% csrf_token %}
+    {% csrf_token %} <!-- CSRF-turva -->
     <input class="card-text" type="text" placeholder="Hae tuotetta" name="search">
     <input type="submit" value="Hae" class="btn btn-success btn-sm">
 </form>
 
-
+<!-- Tuotelistaus -->
 {% for p in tuotteet %}
 <div class="card" style="width: 50rem;">
     <div class="card-body">
-        <h3 class="card-title">{{ p.tuotenimi }}</h3>
-        <h5 class="card-text">Toimittaja: {{ p.toimittaja.yritysnimi }}</h5>
-        <p class="card-text">Tuotteen hinta: {{ p.kappalehinta }} euroa</p>
-        <p class="card-text">Tuotteen paino: {{ p.painoperkappale }}</p>
-        <p class="card-text" style="color: green;">Määrä varastossa: {{ p.tuotteitavarastossa }}</p>
+        <h3 class="card-title">{{ p.tuotenimi }}</h3> <!-- Tuotteen nimi -->
+        <h5 class="card-text">Toimittaja: {{ p.toimittaja.yritysnimi }}</h5> <!-- Tuotteen toimittaja -->
+        <p class="card-text">Tuotteen hinta: {{ p.kappalehinta }} euroa</p> <!-- Tuotteen hinta -->
+        <p class="card-text">Tuotteen paino: {{ p.painoperkappale }}</p> <!-- Tuotteen paino -->
+        <p class="card-text" style="color: green;">Määrä varastossa: {{ p.tuotteitavarastossa }}</p> <!-- Varastomäärä -->
+
+        <!-- Muokkaa ja poista -painikkeet -->
         <a href="/edit-tuote-get/{{ p.id }}/" class="btn btn-primary">Muokkaa</a>
         <a href="/vahvista-tuote-poisto/{{ p.id }}/" class="btn btn-danger">Poista</a>
     </div>
 </div>
 {% empty %}
-
+<!-- Viesti, jos tuotteita ei löydy -->
 <div class="card" style="width: 50rem;">
     <div class="card-body">
         <p class="card-text">En löytänyt tuotteita tietokannasta ! </p>
@@ -44,7 +48,7 @@
 <a href="/toimittajat/" class="btn btn-secondary">Takaisin toimittajalistaukseen</a>
 
 
-
+<!-- JavaScript-lomake uuden tuotteen lisäämiseksi -->
 <script>
 
     let y = `
@@ -73,10 +77,12 @@
         </div>
     </div>`
 
+    // Näyttää lisäyslomakkeen
     function showaddform() {
         document.getElementById("add-div").innerHTML = y
     }
-
+    
+// Piilottaa lisäyslomakkeen
     function hideaddform() {
         document.getElementById("add-div").innerHTML = ""
     }

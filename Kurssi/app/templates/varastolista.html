@@ -1,11 +1,14 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} <!-- Laajentaa index.html-pohjaa -->
 
-{% block content %}
-<div class="container mt-4">
-    <h2 class="varasto-title">Varasto</h2>
-    <table class="table varasto-table">
+{% block content %} <!-- Määrittelee tämän sivun sisällön -->
+
+<div class="container mt-4"> <!-- Keskitetty kontti, jossa on marginaalia yläreunassa -->
+    <h2 class="varasto-title">Varasto</h2> <!-- Sivun otsikko -->
+
+    <table class="table varasto-table"> <!-- Taulukko varastotiedoille -->
         <thead>
             <tr>
+                <!-- Taulukon otsikkorivit -->
                 <th>#</th>
                 <th>Tuotenimi</th>
                 <th>Paino per kappale</th>
@@ -16,22 +19,22 @@
             </tr>
         </thead>
         <tbody>
-            {% for varasto in varastot %}
+            {% for varasto in varastot %} <!-- Iteroi varastotiedot -->
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ varasto.tuotenimi }}</td>
-                <td>{{ varasto.painoperkappale }}</td>
-                <td>{{ varasto.kappalehinta }}</td>
-                <td>{{ varasto.tuotteitavarastossa }}</td>
-                <td>{{ varasto.toimittaja_nimi|default:"Ei tiedossa" }}</td>
-                <td>{{ varasto.toimittaja_maa|default:"Ei tiedossa" }}</td>
+                <td>{{ forloop.counter }}</td> <!-- Järjestysnumero -->
+                <td>{{ varasto.tuotenimi }}</td> <!-- Tuotteen nimi -->
+                <td>{{ varasto.painoperkappale }}</td> <!-- Paino per kappale -->
+                <td>{{ varasto.kappalehinta }}</td> <!-- Kappalehinta -->
+                <td>{{ varasto.tuotteitavarastossa }}</td> <!-- Tuotemäärä varastossa -->
+                <td>{{ varasto.toimittaja_nimi|default:"Ei tiedossa" }}</td> <!-- Toimittajan nimi tai oletusteksti -->
+                <td>{{ varasto.toimittaja_maa|default:"Ei tiedossa" }}</td> <!-- Toimittajan maa tai oletusteksti -->
             </tr>
             {% empty %}
             <tr>
-                <td colspan="7" class="text-center">Ei tuotteita varastossa</td>
+                <td colspan="7" class="text-center">Ei tuotteita varastossa</td> <!-- Viesti tyhjälle taulukolle -->
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-{% endblock %}
+{% endblock %} <!-- Lopettaa sisällön määrittelyn -->

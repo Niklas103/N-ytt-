@@ -1,19 +1,21 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} <!-- Laajentaa index.html-pohjan, joten yhteiset osat tulevat automaattisesti -->
 
-{% block content %}
+{% block content %} <!-- Sisältöosa, joka korvaa pohjasivun "content"-osion -->
 
-<h1>Toimittajan poisto</h1>
+<h1>Toimittajan poisto</h1> <!-- Sivun otsikko -->
 
-<div class="card" style="width: 50rem;">
+<div class="card" style="width: 50rem;"> <!-- Kortti, joka sisältää toimittajan poiston vahvistuksen -->
     <div class="card-body">
-        <h3 class="card-title">Vahvista toimittajan poisto</h3>
-        <h5 class="card-text">Yritys: {{toimittaja.yritysnimi}}</h5>
+        <h3 class="card-title">Vahvista toimittajan poisto</h3> <!-- Toiminnon otsikko -->
+        <h5 class="card-text">Yritys: {{toimittaja.yritysnimi}}</h5> <!-- Näytetään poistettavan toimittajan nimi -->
         
+        <!-- Painike, joka vie käyttäjän takaisin toimittajien listaukseen -->
         <a href="/toimittajat/" class="btn btn-primary">Takaisin</a>
 
+        <!-- Painike, joka lähettää pyynnön toimittajan poistamiseksi -->
         <a href="/poista-toimittaja/{{toimittaja.id}}/" class="btn btn-danger">Poista</a>
 
     </div>
 </div>
 
-{% endblock %}
+{% endblock %} <!-- Lopettaa "content"-osion -->
