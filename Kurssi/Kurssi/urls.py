@@ -17,9 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-admin.site.site_header = 'Suppliers app adminpage'
-admin.site.site_title = 'Suppliers'
-admin.site.index_title = 'Adminpage'
+admin.site.site_header = 'Simon S-Rauta admin sivut'
+admin.site.site_title = 'Toimittajat'
+admin.site.index_title = 'Admin sivu'
 
 urlpatterns = [
     path('admin/', admin.site.urls), # Päätasolta jos kirjoitetaan admin niin ohjaa adminiin
