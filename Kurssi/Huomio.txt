@@ -1,0 +1,27 @@
+Render ohjeessa käytetään guvicornia.
+
+Gunicorn / Guvicorn jne. ei toimi Windowsissa, ainoataan Linux palvelimella minne
+ohjelma julkaistaan.
+
+Jos haluaa ajaa paikallisesti windows ympäristössä:
+Tee:
+
+pip install waitress
+
+Ja sitten:
+
+Luo server.py tiedosto ao. sisällöllä: (tässä projektissa se onkin luotu jo)
+
+from waitress import serve
+from yourdjangoproject.wsgi import application
+
+if __name__ == '__main__':
+    print("Open browser in https://localhost:8000")
+    serve(application, port='8000')
+    
+
+Sitten voit ajaa ohjelman komennolla:
+
+python server.py
+
+Mene selaimella localhost:8000
